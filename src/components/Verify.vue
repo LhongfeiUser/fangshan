@@ -30,7 +30,7 @@
       props:['VerifyNotShow'],
       methods:{
         updateCpatcha(){
-             this.render()
+          // 此处写更新图片方法
         },
         finish()  {
           this.$props.VerifyNotShow();
