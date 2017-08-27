@@ -6,9 +6,10 @@
             <form action="">
               <div class="popup-title">请输入验证码</div>
               <div class="popup-bone">
-                <img src="http://fangshan.bjtcsj.com/api/user/captcha" alt="" class="img-responsive">
+                <!--http://fangshan.bjtcsj.com/api/user/captcha-->
+                <img :src="imgSrc" alt="" class="img-responsive">
                 <input type="text" id="verify_code"> <br>
-                <label for="verify_code">看不清？换一张</label>
+                <label for="verify_code" @click="updateCpatcha">看不清？换一张</label>
                   <span class="btn-confirm" id="btn-join" @click="finish">确定</span>
               </div>
             </form>
@@ -23,12 +24,15 @@
         name: '',
         data(){
             return{
+              imgSrc:"http://fangshan.bjtcsj.com/api/user/captcha",
             }
         },
       props:['VerifyNotShow'],
       methods:{
+        updateCpatcha(){
+             this.render()
+        },
         finish()  {
-          console.log(this.$props);
           this.$props.VerifyNotShow();
         }
       },
