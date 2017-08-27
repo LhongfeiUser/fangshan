@@ -34,7 +34,6 @@
         </div>
       </div>
     </div>
-    <Verify></Verify>
     <p>
     <div class="status-bar container">
         <span @click="like">
@@ -48,10 +47,10 @@
     </p>
     <p class="btn-vote-group">
     <div class="text-center" v-if="$parent.user.isVoted === 0">
-      <button class="btn-support" @click="vote">投 票</button>
-    </div>
+      <button class="btn-support" @click="this.ShowVerify">投 票</button>
+  </div>
     <div class="text-center" v-else>
-      <button class="btn-support btn-support-has" id="btn-support-has">已投票</button>
+      <button class="btn-support btn-support-has" id="btn-support-has" @click="this.ShowVerify">已投票</button>
     </div>
     </p>
     <transition name="fade">
@@ -69,6 +68,7 @@
         </div>
       </div>
     </transition>
+    <Verify v-show="VerifyShow" :VerifyNotShow="this.VerifyNotShow" ></Verify>
   </div>
 </template>
 
@@ -103,7 +103,8 @@
         show: false,
         playing: false,
         slideUrl: [],
-        seen: false
+        seen: false,
+        VerifyShow:0,
       }
     },
     components:{
@@ -149,6 +150,14 @@
             this.opus.works.countLike = oRes.countLike
           }
         })
+      },
+      ShowVerify()
+      {
+        this.VerifyShow=1;
+      },
+      VerifyNotShow(){
+          this.VerifyShow=0;
+          this.vote();
       },
       vote () {
      /*   this.$get("http://fangshan.bjtcsj.com/api/user").then((data) => {
@@ -222,7 +231,8 @@
   }
 
   .media-box .container {
-    padding-bottom: 2rem;
+    padding-bott
+    om: 2rem;
   }
 
   .btn-support {
