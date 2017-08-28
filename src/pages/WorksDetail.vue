@@ -134,7 +134,7 @@
             loop: true,
             prevButton: '.swiper-button-prev',
             nextButton: '.swiper-button-next',
-            // autoplay: 2000,
+             autoplay: 2000,
             speed: 1000,
             effect: 'slide',
             autoplayDisableOnInteraction: false
@@ -231,8 +231,7 @@
   }
 
   .media-box .container {
-    padding-bott
-    om: 2rem;
+    padding-bottom: 2rem;
   }
 
   .btn-support {
@@ -245,7 +244,7 @@
     background: none;
     border-radius: 1rem;
     font-size: 0.95rem;
-    text-align: centr;
+    text-align: center;
     background: #ff6c25;
     color: #fff;
     transition: .3s ease;

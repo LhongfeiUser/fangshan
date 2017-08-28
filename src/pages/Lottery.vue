@@ -65,7 +65,7 @@ export default {
       return this.$http.post('http://fangshan.g-feeling.com/api/user/receive/', {
         mobile: this.mobile
       }, {emulateJSON: true}).then((res) => {
-        var oRes = this.$parent.formatRes(res)
+        var oRes = this.$parent.formatRes(res);
 
         if (oRes.code === 200) {
           this.$parent.user = oRes.user
@@ -79,7 +79,7 @@ export default {
       .then(() => {
         // alert('desc:' + this.desc)
         // alert(window.location.href)
-        global.wx.hideAllNonBaseMenuItem()
+        global.wx.hideAllNonBaseMenuItem();
         global.wx.showMenuItems({
           menuList: [
             'menuItem:refresh',

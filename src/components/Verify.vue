@@ -1,21 +1,21 @@
 <template>
     <div class="verify">
-      <transition name="fade">
+
         <div class="pop-mask">
           <div class="popup">
             <form action="">
               <div class="popup-title">请输入验证码</div>
               <div class="popup-bone">
                 <!--http://fangshan.bjtcsj.com/api/user/captcha-->
-                <img :src="imgSrc" alt="" class="img-responsive" id="img-responsive">
-                <input type="text" id="verify_code"> <br>
-                <label for="verify_code" @click="updateCpatcha" id="verify_hint">看不清？换一张</label>
+                <img :src="imgSrc" alt="" class="img-responsive" id="code">
+                <input type="text" id="verify_code" autocomplete="false"> <br>
+                <a @click="updateCpatcha" id="verify_hint">看不清？换一张</a>
                   <span class="btn-confirm sure" id="btn-join" @click="finish">确定</span>
               </div>
             </form>
           </div>
         </div>
-      </transition>
+
     </div>
 </template>
 
@@ -31,12 +31,20 @@
       methods:{
         updateCpatcha(){
           // 此处写更新图片方法
-          return this.$http.get('http://fangshan.bjtcsj.com/api/refresh').then((res) => {
-
-          })
+          this.captcha='http://fangshan.bjtcsj.com/api/user/captcha?';
+          this.imgSrc=this.captcha+Math.random();
         },
         finish()  {
-          this.$props.VerifyNotShow();
+          var val=$('#verify_code')[0].value;
+          return this.$http.post('http://fangshan.bjtcsj.com/api/user/captcha',val).then((res)=>{
+            if(res.code!=='10003'){
+              this.$props.VerifyNotShow();
+            }else {
+              this.captcha='http://fangshan.bjtcsj.com/api/user/captcha?';
+              this.imgSrc=this.captcha+Math.random();
+            }
+          })
+
         }
       },
         components: {},
@@ -61,7 +69,7 @@
   .sure{
     text-align: center;
   }
-  #img-responsive{
+  #code{
     width:80%;
     height:3rem;
   }
